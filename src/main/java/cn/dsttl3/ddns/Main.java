@@ -10,7 +10,6 @@ public class Main {
         String domainRR = "www";
         // 解析记录类型
         String domainType = "AAAA";
-
         // 地域ID
         String  Region_ID = "cn-qingdao";
         // 您的AccessKey ID
@@ -18,6 +17,7 @@ public class Main {
         // 您的AccessKey Secret
         String  AccessKey_Secret = "UvgzM48w5DKPXKshEYW3YyV1rxO0B7";
 
-        DDNS.updateDNS(domainName,domainRR,domainType,Region_ID,AccessKey_ID,AccessKey_Secret);
+        String r = DDNS.updateDNS(domainName,domainRR,domainType,Region_ID,AccessKey_ID,AccessKey_Secret);
+        System.out.println(r);
     }
 }

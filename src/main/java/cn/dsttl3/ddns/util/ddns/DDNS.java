@@ -33,7 +33,7 @@ public class DDNS {
             throw new RuntimeException();
         }
     }
-    public static void updateDNS(String domainName, String domainRR, String domainType, String Region_ID, String AccessKey_ID, String AccessKey_Secret) {
+    public static String updateDNS(String domainName, String domainRR, String domainType, String Region_ID, String AccessKey_ID, String AccessKey_Secret) {
         // 设置鉴权参数，初始化客户端
         DefaultProfile profile = DefaultProfile.getProfile(Region_ID, AccessKey_ID, AccessKey_Secret);
         IAcsClient client = new DefaultAcsClient(profile);
@@ -58,13 +58,13 @@ public class DDNS {
                 currentHostIP = GetIP.GetIPv4();
                 if (currentHostIP == null) {
                     System.out.println("获取公网IPv4地址错误。");
-                    return;
+                    return "获取公网IPv4地址错误。";
                 }
             }else if (domainType.equals("AAAA")){
                 currentHostIP = GetIP.GetIPv6();
                 if (currentHostIP == null) {
                     System.out.println("获取公网IPv6地址错误。");
-                    return;
+                    return "获取公网IPv6地址错误。";
                 }
             }
             System.out.println("当前主机公网 IP为：\t" + currentHostIP + "");
@@ -77,8 +77,10 @@ public class DDNS {
                 ddns.updateDomainRecord(updateDomainRecordRequest, client);
             }
             System.out.println("[" + domainRR + "." + domainName + "]设置完成。");
+            return "[" + domainRR + "." + domainName + "]设置完成。";
         } else {
             System.out.println("没有找到[" + domainRR + "." + domainName + "]解析记录,请前往[https://dns.console.aliyun.com/]手动添加后再试。");
+            return "没有找到[" + domainRR + "." + domainName + "]解析记录,请前往[https://dns.console.aliyun.com/]手动添加后再试。";
         }
     }
 }
