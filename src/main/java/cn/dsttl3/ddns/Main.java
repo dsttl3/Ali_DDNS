@@ -7,7 +7,7 @@ public class Main {
         // 主域名
         String domainName = "l3.pub";
         // 主机记录
-        String domainRR = "www";
+        String domainRR = "pc";
         // 解析记录类型
         String domainType = "AAAA";
         // 地域ID
