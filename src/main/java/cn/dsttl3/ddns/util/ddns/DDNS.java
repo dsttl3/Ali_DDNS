@@ -1,5 +1,6 @@
 package cn.dsttl3.ddns.util.ddns;
 
+import cn.dsttl3.ddns.util.ddns.bean.JsonBean;
 import cn.dsttl3.ddns.util.ip.GetIP;
 import com.aliyuncs.DefaultAcsClient;
 import com.aliyuncs.IAcsClient;
@@ -8,13 +9,15 @@ import com.aliyuncs.alidns.model.v20150109.DescribeDomainRecordsResponse;
 import com.aliyuncs.alidns.model.v20150109.UpdateDomainRecordRequest;
 import com.aliyuncs.exceptions.ClientException;
 import com.aliyuncs.profile.DefaultProfile;
+import com.google.gson.Gson;
+
 import java.util.List;
 
 public class DDNS {
     /**
      * 获取主域名的所有解析记录列表
      */
-    private DescribeDomainRecordsResponse describeDomainRecords(DescribeDomainRecordsRequest request,IAcsClient client) {
+    private DescribeDomainRecordsResponse describeDomainRecords(DescribeDomainRecordsRequest request, IAcsClient client) {
         try {
             return client.getAcsResponse(request);
         } catch (ClientException e) {
@@ -22,6 +25,7 @@ public class DDNS {
             throw new RuntimeException();
         }
     }
+
     /**
      * 修改解析记录
      */
@@ -33,7 +37,9 @@ public class DDNS {
             throw new RuntimeException();
         }
     }
+
     public static String updateDNS(String domainName, String domainRR, String domainType, String Region_ID, String AccessKey_ID, String AccessKey_Secret) {
+        JsonBean jsonBean = new JsonBean();
         // 设置鉴权参数，初始化客户端
         DefaultProfile profile = DefaultProfile.getProfile(Region_ID, AccessKey_ID, AccessKey_Secret);
         IAcsClient client = new DefaultAcsClient(profile);
@@ -49,19 +55,22 @@ public class DDNS {
         if (domainRecords.size() != 0) {
             DescribeDomainRecordsResponse.Record record = domainRecords.get(0);
             String recordId = record.getRecordId();
-            System.out.println("解析记录ID："+recordId);
+            System.out.println("解析记录ID：" + recordId);
             String recordsValue = record.getValue();
+            jsonBean.setRecordsIP(recordsValue);
             System.out.println("当前DNS服务器IP为：\t" + recordsValue + "");
             String currentHostIP = "";
             // 当前主机公网IP
-            if(domainType.equals("A")){
+            if (domainType.equals("A")) {
                 currentHostIP = GetIP.GetIPv4();
+                jsonBean.setIpv4(currentHostIP);
                 if (currentHostIP == null) {
                     System.out.println("获取公网IPv4地址错误。");
                     return "获取公网IPv4地址错误。";
                 }
-            }else if (domainType.equals("AAAA")){
+            } else if (domainType.equals("AAAA")) {
                 currentHostIP = GetIP.GetIPv6();
+                jsonBean.setIpv6(currentHostIP);
                 if (currentHostIP == null) {
                     System.out.println("获取公网IPv6地址错误。");
                     return "获取公网IPv6地址错误。";
@@ -75,9 +84,14 @@ public class DDNS {
                 updateDomainRecordRequest.setValue(currentHostIP);
                 updateDomainRecordRequest.setType(domainType);
                 ddns.updateDomainRecord(updateDomainRecordRequest, client);
+                jsonBean.setUpdata(true);
             }
+            jsonBean.setDomainRR(domainRR);
+            jsonBean.setDomainName(domainName);
+            jsonBean.setDomainType(domainType);
+            String json = new Gson().toJson(jsonBean);
             System.out.println("[" + domainRR + "." + domainName + "]设置完成。");
-            return "[" + domainRR + "." + domainName + "]设置完成。";
+            return "[" + domainRR + "." + domainName + "]设置完成。\n" + json;
         } else {
             System.out.println("没有找到[" + domainRR + "." + domainName + "]解析记录,请前往[https://dns.console.aliyun.com/]手动添加后再试。");
             return "没有找到[" + domainRR + "." + domainName + "]解析记录,请前往[https://dns.console.aliyun.com/]手动添加后再试。";
