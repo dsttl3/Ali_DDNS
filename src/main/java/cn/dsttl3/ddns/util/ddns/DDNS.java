@@ -59,7 +59,7 @@ public class DDNS {
             System.out.println("解析记录ID：" + recordId);
             String recordsValue = record.getValue();
             jsonBean.setRecordsIP(recordsValue);
-            System.out.println("当前DNS服务器IP为：\t" + recordsValue + "");
+            System.out.println("当前DNS服务器IP为：\t" + recordsValue + "。");
             String currentHostIP = "";
             // 当前主机公网IP
             if (domainType.equals("A")) {
@@ -77,7 +77,7 @@ public class DDNS {
                     return "获取公网IPv6地址错误。";
                 }
             }
-            System.out.println("当前主机公网 IP为：\t" + currentHostIP + "");
+            System.out.println("当前主机公网 IP为：\t" + currentHostIP + "。");
             if (!currentHostIP.equals(recordsValue)) {
                 UpdateDomainRecordRequest updateDomainRecordRequest = new UpdateDomainRecordRequest();
                 updateDomainRecordRequest.setRR(domainRR);
