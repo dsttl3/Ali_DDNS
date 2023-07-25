@@ -2,6 +2,7 @@ package cn.dsttl3.ddns.util.ddns;
 
 import cn.dsttl3.ddns.util.ddns.bean.JsonBean;
 import cn.dsttl3.ddns.util.ip.GetIP;
+import cn.dsttl3.ddns.util.ip.GetIPv6;
 import com.aliyuncs.DefaultAcsClient;
 import com.aliyuncs.IAcsClient;
 import com.aliyuncs.alidns.model.v20150109.DescribeDomainRecordsRequest;
@@ -69,7 +70,7 @@ public class DDNS {
                     return "获取公网IPv4地址错误。";
                 }
             } else if (domainType.equals("AAAA")) {
-                currentHostIP = GetIP.GetIPv6();
+                currentHostIP = GetIPv6.load();
                 jsonBean.setIpv6(currentHostIP);
                 if (currentHostIP == null) {
                     System.out.println("获取公网IPv6地址错误。");
