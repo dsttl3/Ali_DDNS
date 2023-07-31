@@ -70,7 +70,7 @@ public class DDNS {
                     return "获取公网IPv4地址错误。";
                 }
             } else if (domainType.equals("AAAA")) {
-                currentHostIP = GetIPv6.load();
+                currentHostIP = GetIPv6.load("240e","%en0");
                 jsonBean.setIpv6(currentHostIP);
                 if (currentHostIP == null) {
                     System.out.println("获取公网IPv6地址错误。");

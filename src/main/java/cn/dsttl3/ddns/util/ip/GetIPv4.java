@@ -5,6 +5,9 @@ import java.net.SocketException;
 import java.util.Enumeration;
 
 public class GetIPv4 {
+    /**
+     * 获取IPv4地址，因只能获取内网地址，废弃
+     */
     public static void main(String[] args) {
         try {
             Enumeration<NetworkInterface> networkInterfaces = NetworkInterface.getNetworkInterfaces();
