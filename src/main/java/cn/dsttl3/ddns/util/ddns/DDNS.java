@@ -40,7 +40,8 @@ public class DDNS {
         }
     }
 
-    public static String updateDNS(String domainName, String domainRR, String domainType, String Region_ID, String AccessKey_ID, String AccessKey_Secret) {
+    public static String updateDNS(String domainName, String domainRR, String domainType, String Region_ID,
+                                   String AccessKey_ID, String AccessKey_Secret, String prefix, String netCard) {
         JsonBean jsonBean = new JsonBean();
         // 设置鉴权参数，初始化客户端
         DefaultProfile profile = DefaultProfile.getProfile(Region_ID, AccessKey_ID, AccessKey_Secret);
@@ -71,7 +72,7 @@ public class DDNS {
                     return "获取公网IPv4地址错误。";
                 }
             } else if (domainType.equals("AAAA")) {
-                currentHostIP = GetIPv6.load(Config.prefix,Config.netCard);
+                currentHostIP = GetIPv6.load(prefix,netCard);
                 jsonBean.setIpv6(currentHostIP);
                 if (currentHostIP == null) {
                     System.out.println("获取公网IPv6地址错误。");
