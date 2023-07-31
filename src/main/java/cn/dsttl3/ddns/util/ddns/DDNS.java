@@ -1,5 +1,6 @@
 package cn.dsttl3.ddns.util.ddns;
 
+import cn.dsttl3.ddns.util.Config;
 import cn.dsttl3.ddns.util.ddns.bean.JsonBean;
 import cn.dsttl3.ddns.util.ip.GetIP;
 import cn.dsttl3.ddns.util.ip.GetIPv6;
@@ -70,7 +71,7 @@ public class DDNS {
                     return "获取公网IPv4地址错误。";
                 }
             } else if (domainType.equals("AAAA")) {
-                currentHostIP = GetIPv6.load("240e","%en0");
+                currentHostIP = GetIPv6.load(Config.prefix,Config.netCard);
                 jsonBean.setIpv6(currentHostIP);
                 if (currentHostIP == null) {
                     System.out.println("获取公网IPv6地址错误。");
