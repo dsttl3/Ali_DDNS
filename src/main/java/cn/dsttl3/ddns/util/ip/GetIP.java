@@ -10,13 +10,19 @@ import java.io.IOException;
 import java.util.Objects;
 
 /**
- * @author dsttl3
+ * 获取外网地址
  */
 public class GetIP {
+    /**
+     * @return 获取外网IPv4地址
+     */
     public static String GetIPv4(){
         String url = "https://v4.ip.zxinc.org/info.php?type=json";
         return getIP(url);
     }
+    /**
+     * @return 获取外网IPv6地址
+     */
     public static String GetIPv6(){
         String url = "https://v6.ip.zxinc.org/info.php?type=json";
         return getIP(url);
