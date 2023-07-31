@@ -13,4 +13,8 @@ public class Config {
     public static String  AccessKey_ID = "";
     // 您的 阿里云 AccessKey Secret
     public static String  AccessKey_Secret = "";
+
+    public static String prefix = "240e";
+
+    public static String netCard = "%en0";
 }
