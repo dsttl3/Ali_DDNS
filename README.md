@@ -1,6 +1,9 @@
 # Ali_DDNS
 
 阿里DDNS
+>这是一个基于阿里云提供的API的域名解析服务，旨在帮助用户实现动态的域名解析功能。通过该服务，用户可以获取其当前的公共IP地址，并在IP地址发生变化时，自动更新相关域名的解析记录，确保域名始终与正确的IP地址相匹配。
+
+>This is a domain name resolution service based on the API provided by Alibaba Cloud, designed to assist users in achieving dynamic domain name resolution. Through this service, users can obtain their current public IP address and automatically update the relevant domain name's resolution records whenever the IP address changes, ensuring that the domain always matches the correct IP address.
 
 ``` Java
     // 主域名 目前只支持阿里云账号下的域名
