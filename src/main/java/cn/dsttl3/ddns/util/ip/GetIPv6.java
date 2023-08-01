@@ -21,7 +21,7 @@ public class GetIPv6 {
                     InetAddress inetAddress = inetAddresses.nextElement();
                     if (inetAddress instanceof java.net.Inet6Address) {
                         if (inetAddress.getHostAddress().startsWith(prefix) && inetAddress.getHostAddress().endsWith(netCard)) {
-                            IPv6 = inetAddress.getHostAddress().substring(0, inetAddress.getHostAddress().length() - 4);
+                            IPv6 = inetAddress.getHostAddress().substring(0, inetAddress.getHostAddress().length() - netCard.length());
                         }
                     }
                 }

@@ -2,7 +2,7 @@ package cn.dsttl3.ddns.util;
 
 public class Config {
     // 主域名
-    public static String domainName = "l3.pub";
+    public static String domainName = "dsttl3.cn";
     // 主机记录
     public static String domainRR = "home";
     // 解析记录类型
@@ -16,5 +16,5 @@ public class Config {
     // IPv6地址前缀，用于区分内网地址
     public static String prefix = "240e";
     // 网卡标识，用于选择网卡
-    public static String netCard = "%en0";
+    public static String netCard = "%eth0";
 }
