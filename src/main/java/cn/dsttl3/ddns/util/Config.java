@@ -4,7 +4,7 @@ public class Config {
     // 主域名
     public static String domainName = "l3.pub";
     // 主机记录
-    public static String domainRR = "pc";
+    public static String domainRR = "home";
     // 解析记录类型
     public static String domainType = "AAAA";
     // 地域ID
