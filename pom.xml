@@ -55,5 +55,10 @@
             <version>2.10.1</version>
         </dependency>
 
+        <dependency>
+            <groupId>com.aliyun.fc.runtime</groupId>
+            <artifactId>fc-java-core</artifactId>
+            <version>1.4.1</version>
+        </dependency>
     </dependencies>
 </project>

@@ -41,7 +41,7 @@ public class DDNS {
     }
 
     public static String updateDNS(String domainName, String domainRR, String domainType, String Region_ID,
-                                   String AccessKey_ID, String AccessKey_Secret, String prefix, String netCard) {
+                                   String AccessKey_ID, String AccessKey_Secret, String currentHostIP) {
         JsonBean jsonBean = new JsonBean();
         // 设置鉴权参数，初始化客户端
         DefaultProfile profile = DefaultProfile.getProfile(Region_ID, AccessKey_ID, AccessKey_Secret);
@@ -55,29 +55,18 @@ public class DDNS {
         DescribeDomainRecordsResponse describeDomainRecordsResponse = ddns.describeDomainRecords(describeDomainRecordsRequest, client);
         List<DescribeDomainRecordsResponse.Record> domainRecords = describeDomainRecordsResponse.getDomainRecords();
         // 最新的一条解析记录
-        if (domainRecords.size() != 0) {
+        if (!domainRecords.isEmpty()) {
             DescribeDomainRecordsResponse.Record record = domainRecords.get(0);
             String recordId = record.getRecordId();
             System.out.println("解析记录ID：" + recordId);
             String recordsValue = record.getValue();
             jsonBean.setRecordsIP(recordsValue);
             System.out.println("当前DNS服务器IP为：\t" + recordsValue + "。");
-            String currentHostIP = "";
             // 当前主机公网IP
             if (domainType.equals("A")) {
-                currentHostIP = GetIP.GetIPv4();
                 jsonBean.setIpv4(currentHostIP);
-                if (currentHostIP == null) {
-                    System.out.println("获取公网IPv4地址错误。");
-                    return "获取公网IPv4地址错误。";
-                }
             } else if (domainType.equals("AAAA")) {
-                currentHostIP = GetIPv6.load(prefix,netCard);
                 jsonBean.setIpv6(currentHostIP);
-                if (currentHostIP == null) {
-                    System.out.println("获取公网IPv6地址错误。");
-                    return "获取公网IPv6地址错误。";
-                }
             }
             System.out.println("当前主机公网 IP为：\t" + currentHostIP + "。");
             if (!currentHostIP.equals(recordsValue)) {
@@ -94,7 +83,7 @@ public class DDNS {
             jsonBean.setDomainType(domainType);
             String json = new Gson().toJson(jsonBean);
             System.out.println("[" + domainRR + "." + domainName + "]设置完成。");
-            return "[" + domainRR + "." + domainName + "]设置完成。\n" + json;
+            return json;
         } else {
             System.out.println("没有找到[" + domainRR + "." + domainName + "]解析记录,请前往[https://dns.console.aliyun.com/]手动添加后再试。");
             return "没有找到[" + domainRR + "." + domainName + "]解析记录,请前往[https://dns.console.aliyun.com/]手动添加后再试。";

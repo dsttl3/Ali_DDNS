@@ -16,5 +16,5 @@ public class Config {
     // IPv6地址前缀，用于区分内网地址
     public static String prefix = "240e";
     // 网卡标识，用于选择网卡
-    public static String netCard = "%eth0";
+    public static String netCard = "%en0";
 }
