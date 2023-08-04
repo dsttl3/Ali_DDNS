@@ -28,7 +28,7 @@ public class GetIPv6 {
             }
             return IPv6;
         } catch (SocketException e) {
-            e.printStackTrace();
+            System.out.println(e.getMessage());
             return null;
         }
     }

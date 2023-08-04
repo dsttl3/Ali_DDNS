@@ -86,7 +86,7 @@ public class DDNS {
             return json;
         } else {
             System.out.println("没有找到[" + domainRR + "." + domainName + "]解析记录,请前往[https://dns.console.aliyun.com/]手动添加后再试。");
-            return "没有找到[" + domainRR + "." + domainName + "]解析记录,请前往[https://dns.console.aliyun.com/]手动添加后再试。";
+            return "{\"code\": 400,\"msg\": \"没有找到[" + domainRR + "." + domainName + "]解析记录,请前往[https://dns.console.aliyun.com/]手动添加后再试。\"}";
         }
     }
 }

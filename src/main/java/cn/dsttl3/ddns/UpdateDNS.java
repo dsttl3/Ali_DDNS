@@ -4,13 +4,20 @@ import cn.dsttl3.ddns.util.Config;
 import cn.dsttl3.ddns.util.ddns.DDNS;
 import com.aliyun.fc.runtime.Context;
 import com.aliyun.fc.runtime.HttpRequestHandler;
-
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.OutputStream;
 
+/**
+ * 阿里云函数计算http触发器函数（默认IPv6）
+ * domain   域名
+ * rr   二级域名
+ * id   阿里云 AccessKey ID
+ * secret   阿里云 AccessKey Secret
+ * ip   IP地址
+ */
 public class UpdateDNS implements HttpRequestHandler {
     @Override
     public void handleRequest(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Context context) throws IOException, ServletException {
