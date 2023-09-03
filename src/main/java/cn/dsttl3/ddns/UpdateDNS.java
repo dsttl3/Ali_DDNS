@@ -18,7 +18,16 @@ import java.io.OutputStream;
  * secret   阿里云 AccessKey Secret
  * ip   IP地址
  */
+
 public class UpdateDNS implements HttpRequestHandler {
+    /**
+     *
+     * @param httpServletRequest 请求体
+     * @param httpServletResponse 响应体
+     * @param context 上下文
+     * @throws IOException
+     * @throws ServletException
+     */
     @Override
     public void handleRequest(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Context context) throws IOException, ServletException {
         String domain = httpServletRequest.getParameter("domain");
