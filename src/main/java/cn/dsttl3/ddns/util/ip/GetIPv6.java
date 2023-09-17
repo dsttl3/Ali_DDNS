@@ -20,6 +20,9 @@ public class GetIPv6 {
                 while (inetAddresses.hasMoreElements()) {
                     InetAddress inetAddress = inetAddresses.nextElement();
                     if (inetAddress instanceof java.net.Inet6Address) {
+//                        if (inetAddress.getHostAddress().startsWith(prefix)){
+//                            System.out.println(inetAddress.getHostAddress());
+//                        }
                         if (inetAddress.getHostAddress().startsWith(prefix) && inetAddress.getHostAddress().endsWith(netCard)) {
                             IPv6 = inetAddress.getHostAddress().substring(0, inetAddress.getHostAddress().length() - netCard.length());
                         }
