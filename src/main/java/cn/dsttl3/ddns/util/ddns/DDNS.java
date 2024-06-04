@@ -43,17 +43,29 @@ public class DDNS {
     public static String updateDNS(String domainName, String domainRR, String domainType, String Region_ID,
                                    String AccessKey_ID, String AccessKey_Secret, String currentHostIP) {
         JsonBean jsonBean = new JsonBean();
-        // 设置鉴权参数，初始化客户端
+
+        // 初始化阿里云客户端配置，用于后续调用API
         DefaultProfile profile = DefaultProfile.getProfile(Region_ID, AccessKey_ID, AccessKey_Secret);
         IAcsClient client = new DefaultAcsClient(profile);
+
+        // 创建DDNS服务实例
         DDNS ddns = new DDNS();
-        // 查询指定二级域名的最新解析记录
+
+        // 创建请求对象，用于查询域名记录
         DescribeDomainRecordsRequest describeDomainRecordsRequest = new DescribeDomainRecordsRequest();
+        // 设置查询的域名
         describeDomainRecordsRequest.setDomainName(domainName);
+        // 设置查询的主机记录
         describeDomainRecordsRequest.setRRKeyWord(domainRR);
+        // 设置查询的记录类型
         describeDomainRecordsRequest.setType(domainType);
+
+        // 调用DDNS服务的查询方法，获取域名记录列表
         DescribeDomainRecordsResponse describeDomainRecordsResponse = ddns.describeDomainRecords(describeDomainRecordsRequest, client);
+        // 获取查询结果中的域名记录列表
         List<DescribeDomainRecordsResponse.Record> domainRecords = describeDomainRecordsResponse.getDomainRecords();
+
+
         // 最新的一条解析记录
         if (!domainRecords.isEmpty()) {
             DescribeDomainRecordsResponse.Record record = domainRecords.get(0);
