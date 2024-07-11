@@ -14,7 +14,7 @@ public class Config {
     // 您的 阿里云 AccessKey Secret
     public static String  AccessKey_Secret = "*****";
     // IPv6地址前缀，用于区分内网地址
-    public static String prefix = "240e";
+    public static String prefix = "240";
     // 网卡标识，用于选择网卡
     public static String netCard = "%en0";
 }
