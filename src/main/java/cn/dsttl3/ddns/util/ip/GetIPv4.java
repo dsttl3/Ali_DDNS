@@ -1,7 +1,13 @@
 package cn.dsttl3.ddns.util.ip;
+import org.apache.http.HttpRequest;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+
+import java.io.IOException;
 import java.net.InetAddress;
 import java.net.NetworkInterface;
 import java.net.SocketException;
+import java.net.URI;
 import java.util.Enumeration;
 
 public class GetIPv4 {
@@ -25,4 +31,6 @@ public class GetIPv4 {
             e.printStackTrace();
         }
     }
+
+
 }
